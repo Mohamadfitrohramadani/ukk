@@ -55,4 +55,7 @@ class M_Album extends CI_Model
       return $this->db->get_where('tbl_album', array('album_id' => $album_id))->row();
     }
 
+    public function count_album() {
+        return $this->db->count_all_results('tbl_album');
+    }
 }

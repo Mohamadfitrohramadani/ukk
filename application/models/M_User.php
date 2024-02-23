@@ -56,5 +56,9 @@ class M_User extends CI_Model
 
         return $query->row_array();
     }
+    public function count_users() {
+        return $this->db->count_all_results('tbl_user');
+    }
+    
 
 }

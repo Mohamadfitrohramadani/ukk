@@ -8,13 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Profil</title>
+    <title>LuxeLens-Upload</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="icon" href="<?= base_url('logo/6c.jpg') ?>" type="" style="widht: 200px; height: 200px;">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap"
         rel="stylesheet">
@@ -57,7 +57,7 @@ https://templatemo.com/tm-584-pod-talk
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand me-lg-5 me-0" href="index.html">
-                    <img src="<?= base_url() ?>logo/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
+                    <img src="<?= base_url() ?>logo/b.png" class="logo-image img-fluid" alt="templatemo pod talk">
                 </a>
 
                 <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
@@ -78,28 +78,38 @@ https://templatemo.com/tm-584-pod-talk
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto">
-                    <li class="nav-item">
-                            <a class="nav-link " href="<?= base_url('home')?>">Home</a>
-                        </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('home/album')?>">Album</a>
+                            <a class="nav-link " href="<?= base_url('home') ?>">Home</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('#')?>">Upload Gambar</a>
+                            <a class="nav-link active" href="<?= base_url('home/uploadfoto') ?>">Upload Foto</a>
                         </li>
                         <li class="nav-item dropdown">
-                        <a class="nav-link" href="<?= base_url('')?>">Profil</a>
+                            <a class="nav-link" href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">Profil</a>
                         </li>
                     </ul>
                     <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
-                        <a href="<?= base_url('home/profil') ?>">
+                        <a href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">
                             <div class="btn custom-btn custom-border-btn smoothscroll">
 
-                                <img src="<?= base_url('assets/user/' . $this->session->userdata('foto_user')); ?>"
-                                    alt="Profile Picture" style="width: 30px; height: 25px; border-radius: 50%;">
-                                <?= $this->session->userdata('username'); ?>
+                            <?php
+                                $username = $this->session->userdata('username');
+                                $foto_user = $this->session->userdata('foto_user');
+                                $foto_user_path = base_url('assets/user/' . $foto_user);
+                                $default_foto_path = base_url('logo/user.png'); // Ganti dengan path foto default yang sesuai
+                            
+                                // Periksa apakah foto pengguna tersedia
+                                if ($foto_user && file_exists(FCPATH . 'assets/user/' . $foto_user)) {
+                                    $foto_path = $foto_user_path;
+                                } else {
+                                    $foto_path = $default_foto_path; // Gunakan foto default jika foto pengguna tidak tersedia
+                                }
+                                ?>
+
+                                <!-- Tampilkan gambar pengguna atau gambar default -->
+                                <img src="<?= $foto_path ?>" alt="<?= $foto_path ?>"
+                                    style="width: 30px; height: 28px; border-radius: 50%;">
+                                <?= $username ?>
                             </div>
                         </a>
                         <div class="btn custom-btn ">
@@ -120,41 +130,174 @@ https://templatemo.com/tm-584-pod-talk
         </nav>
 
 
-        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+        <section class="hero-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-12 text-center">
-                        <img src="<?= base_url() ?>assets/user/194935.png" alt="Your Image" class="img-fluid mb-3"
-                            style="max-width: 150px;">
 
-                        <!-- Membungkus tombol-tombol dalam div -->
-                        <div class="buttons-wrapper">
-                            <a href="#" class="btn custom-btn ">Edit Profil</a>
-                            <a href="#" class="btn custom-btn ">Album</a>
-                            <a href="#" class="btn custom-btn ">Aploud Foto</a>
+                    <div class="col-lg-12 col-12">
+                        <div class="text-center mb-5 pb-2">
+                          
                         </div>
                     </div>
+
                 </div>
             </div>
-        </header>
+        </section>
 
 
+        <section class="contact-section section-padding pt-0">
+            <div class="container">
+                <div class="row">
 
-        <div class="container">
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <div class="section-title-wrap mb-5">
+                            <h4 class="section-title">Upload Foto</h4>
+                        </div>
+                        <form action="<?= base_url('home/input_foto') ?>" method="post" class="custom-form contact-form"
+                            role="form" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <label for="lokasi_file">Foto</label>
+                                    <div class="form-floating">
+                                        <input type="file" name="lokasi_file" id="lokasi_file" class="form-control"
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-floating">
+                                        <input type="text" name="judul_foto" id="judul_foto" class="form-control"
+                                            placeholder="Full Name" required="">
+                                        <label for="judul_foto">Judul Foto</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="form-floating">
+                                        <input type="date" name="tgl_unggah" id="tgl_unggah" class="form-control"
+                                            required readonly>
+                                        <label for="tgl_unggah">Tanggal Unggah</label>
+                                    </div>
+                                </div>
+
+                                <!-- Script untuk mengatur nilai input tanggal dengan tanggal saat ini -->
+                                <script>
+                                    // Mendapatkan tanggal saat ini
+                                    var today = new Date();
+
+                                    // Mengonversi tanggal menjadi format YYYY-MM-DD
+                                    var year = today.getFullYear();
+                                    var month = (today.getMonth() + 1).toString().padStart(2, '0'); // Menggunakan padStart untuk menambahkan 0 jika bulan kurang dari 10
+                                    var day = today.getDate().toString().padStart(2, '0'); // Menggunakan padStart untuk menambahkan 0 jika tanggal kurang dari 10
+                                    var currentDate = year + '-' + month + '-' + day;
+
+                                    // Mengatur nilai input tanggal dengan tanggal saat ini
+                                    document.getElementById('tgl_unggah').value = currentDate;
+                                </script>
+
+                                <div class="col-lg-12 col-12">
+                                    <div class="form-floating">
+                                        <select class="form-control" name="album_id" id="album_id" required="">
+                                            <option value="">Klik Untuk Pilih Album</option>
+                                            <?php foreach ($data_album as $album) { ?>
+                                                <option value="<?= $album->album_id; ?>">
+                                                    <?= $album->nama_album; ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                        <label for="album_id">Album</label>
+                                    </div>
+
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="des_foto" name="des_foto"
+                                            placeholder="Describe message here" required=""></textarea>
+                                        <label for="des_foto">Deskripsi</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-12 ms-auto">
+                                    <button type="submit" class="form-control">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="related-podcast-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <div class="section-title-wrap mb-5">
+                            <h4 class="section-title">Foto</h4>
+                        </div>
+                    </div>
+                    <?php foreach ($fotos as $foto): ?>
+                        <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                            <div class="custom-block custom-block-full">
+                                <div class="custom-block-image-wrap">
+                                    <a href="detail-page.html">
+                                        <img src="<?= base_url() ?>assets/<?php echo $foto->lokasi_file; ?>"
+                                            class="custom-block-image img-fluid" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="custom-block-info">
+                                    <h5 class="mb-2">
+                                        <a href="detail-page.html">
+                                            <?php echo $foto->judul_foto; ?>
+                                        </a>
+                                    </h5>
+                                    <p class="small-font">Tggl Unggah:
+                                        <?php echo date('d F Y', strtotime($foto->tgl_unggah)); ?>
+                                    </p>
+                                    <!-- <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p> -->
+                                    <?php if ($this->session->userdata('user_id')): ?>
+                                        <?php
+                                        $user_id = $this->session->userdata('user_id');
+                                        $likeCount = $like_model->getLikeCount($foto->foto_id);
+                                        ?>
+
+                                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
+                                            <a class="bi-heart me-1">
+                                                <span>
+                                                    <?= $likeCount ?>
+                                                </span>
+                                            </a>
+
+                                            <a class="bi-chat me-1">
+                                                <span>
+                                                    <?= $commentCounts[$foto->foto_id] ?>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="social-share d-flex flex-column ms-auto">
+                                    <!-- <a href="<?php echo base_url('home/updatefoto/') . $foto->foto_id ?>" class="badge ms-auto">
+                                    <i class="bi bi-pencil-square"></i>
+                                    </a> -->
+
+                                    <a href="<?php echo base_url('home/delete/') . $foto->foto_id ?>" class="badge ms-auto">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+        <!-- <div class="container">
             <div class="row">
-
-
                 <div class="col-lg-12 col-12">
                     <div class="section-title-wrap mb-5">
                         <h4 class="section-title">Photo</h4>
                     </div>
                 </div>
                 <?php foreach ($fotos as $foto): ?>
-                    <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                    <div class="col-lg-9 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="team-thumb bg-white shadow-lg">
                             <img src="<?= base_url() ?>assets/<?php echo $foto->lokasi_file; ?>" alt="">
-                            <!-- <p><?php echo $foto->lokasi_file; ?></p> -->
-
                             <div class="team-info">
                                 <h6 class="mb-1 judul-font">
                                     <?php echo $foto->judul_foto; ?>
@@ -198,7 +341,7 @@ https://templatemo.com/tm-584-pod-talk
                     </div>
                 <?php endforeach; ?>
             </div>
-        </div>
+        </div> -->
         </section>
         <!-- <section class="latest-podcast-section section-padding" id="section_2">
             <div class="container">
@@ -584,113 +727,6 @@ https://templatemo.com/tm-584-pod-talk
             </div>
         </section> -->
     </main>
-
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <div class="subscribe-form-wrap">
-                        <h6>Subscribe. Every weekly.</h6>
-
-                        <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                            <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                class="form-control" placeholder="Email Address" required="">
-
-                            <div class="col-lg-12 col-12">
-                                <button type="submit" class="form-control" id="submit">Subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
-                    <h6 class="site-footer-title mb-3">Contact</h6>
-
-                    <p class="mb-2"><strong class="d-inline me-2">Phone:</strong> 010-020-0340</p>
-
-                    <p>
-                        <strong class="d-inline me-2">Email:</strong>
-                        <a href="#">inquiry@pod.co</a>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-12">
-                    <h6 class="site-footer-title mb-3">Download Mobile</h6>
-
-                    <div class="site-footer-thumb mb-4 pb-2">
-                        <div class="d-flex flex-wrap">
-                            <a href="#">
-                                <img src="<?= base_url() ?>temhome/images/app-store.png"
-                                    class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
-                            </a>
-
-                            <a href="#">
-                                <img src="<?= base_url() ?>temhome/images/play-store.png" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <h6 class="site-footer-title mb-3">Social</h6>
-
-                    <ul class="social-icon">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-twitter"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-whatsapp"></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container pt-5">
-            <div class="row align-items-center">
-
-                <div class="col-lg-2 col-md-3 col-12">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="<?= base_url() ?>temhome/images/pod-talk-logo.png" class="logo-image img-fluid"
-                            alt="templatemo pod talk">
-                    </a>
-                </div>
-
-                <div class="col-lg-7 col-md-9 col-12">
-                    <ul class="site-footer-links">
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Homepage</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Browse episodes</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Help Center</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-12">
-                    <p class="copyright-text mb-0">Copyright © 2036 Talk Pod Company
-                        <br><br>
-                        Design: <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- JAVASCRIPT FILES -->
     <script src="<?= base_url() ?>temhome/js/jquery.min.js"></script>

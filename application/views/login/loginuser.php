@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   <meta name="description" content=""/>
   <meta name="author" content=""/>
-  <title>Login</title>
+  <title>LuxeLens-Login</title>
   <!-- loader-->
   <link href="<?= base_url()?>template/assets/css/pace.min.css" rel="stylesheet"/>
   <script src="<?= base_url()?>template/assets/js/pace.min.js"></script>
   <!--favicon-->
-  <link rel="icon" href="<?= base_url()?>template/assets/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?= base_url('logo/6c.jpg') ?>" type="" style="widht: 200px; height: 200px;">
   <!-- Bootstrap core CSS-->
   <link href="<?= base_url()?>template/assets/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- animate CSS-->
@@ -38,7 +38,7 @@
 		<div class="card-body">
 		 <div class="card-content p-2">
 		 	<div class="text-center">
-		 		<img src="<?= base_url()?>template/assets/images/logo-icon.png" alt="logo icon">
+		 		<img src="<?= base_url()?>logo/b.png" alt="logo icon" style="widht: 100px; height: 100px;">
 		 	</div>
 		  <div class="card-title text-uppercase text-center py-3">Sign In</div>
 			<?php echo form_open('login'); ?>
@@ -63,12 +63,12 @@
 			<div class="form-row">
 			
 			</div>
-			 <button type="submit" class="btn btn-light btn-block">Sign In</button>
+			 <button type="submit" class="btn btn-light btn-block">Login</button>
 			 <?php echo form_close(); ?>
 		   </div>
 		  </div>
 		  <div class="card-footer text-center py-3">
-		    <p class="text-warning mb-0">Do not have an account? <a href="register.html"> Sign Up here</a></p>
+		    <p class="text-warning mb-0">Belum Memiliki Akun? <a href="<?= base_url('register')?>"> Daftar</a></p>
 		  </div>
 	     </div>
     

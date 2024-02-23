@@ -6,17 +6,11 @@ class Album extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
-        // if (!$this->session->albumdata('email')) {
-        //     redirect('login');
-        // }
-
-        // $role_id = $this->session->albumdata('role_id');
-
-        // if ($role_id == 2) {
-
-        //     redirect('home');
-        // }
+   // Periksa status login pengguna
+   if (!$this->session->userdata('email')) {
+    // Jika belum login, alihkan ke halaman login
+    redirect('login');
+}
         $this->load->model('M_Album');
     }
     public function index()
@@ -26,7 +20,6 @@ class Album extends CI_Controller
         $this->load->view('album/viewalbum', $DATA);
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
 
     }
 
@@ -35,7 +28,6 @@ class Album extends CI_Controller
         $this->load->view('album/tambahalbum');
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
     }
     // public function Inputalbum()
     // {
@@ -111,7 +103,7 @@ class Album extends CI_Controller
                 $this->load->view('album/tambahalbum', $error);
                 $this->load->view('layout/header');
                 $this->load->view('layout/footer');
-                $this->load->view('layout/navbar'); // Replace "your_view" with your actual view for displaying errors
+                
             }
         } else {
             // Form validation failed or initial load
@@ -123,7 +115,6 @@ class Album extends CI_Controller
             $this->load->view('album/tambahalbum', $data, FALSE);
             $this->load->view('layout/header');
             $this->load->view('layout/footer');
-            $this->load->view('layout/navbar');
         }
     }
     // public function update($album_id)
@@ -222,7 +213,6 @@ class Album extends CI_Controller
             );
 
             $this->load->view('layout/header');
-            $this->load->view('layout/navbar');
             $this->load->view('album/editalbum', $data, FALSE);
             $this->load->view('layout/footer');
 

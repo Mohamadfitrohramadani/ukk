@@ -108,5 +108,8 @@ class M_Like extends CI_Model
         return $query->num_rows() > 0;
     }
 
-
+    public function count_like()
+    {
+        return $this->db->count_all_results('tbl_like');
+    }
 }

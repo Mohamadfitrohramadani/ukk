@@ -7,16 +7,11 @@ class foto extends CI_Controller
     {
         parent::__construct();
 
-        // if (!$this->session->fotodata('email')) {
-        //     redirect('login');
-        // }
-
-        // $role_id = $this->session->fotodata('role_id');
-
-        // if ($role_id == 2) {
-
-        //     redirect('home');
-        // }
+         // Periksa status login pengguna
+    if (!$this->session->userdata('email')) {
+        // Jika belum login, alihkan ke halaman login
+        redirect('login');
+    }
         $this->load->model('M_Foto');
         $this->load->model('M_User');
     }
@@ -30,7 +25,7 @@ class foto extends CI_Controller
         $this->load->view('foto/viewfoto', $DATA,);
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
+        
     }
     public function tambahfoto()
     {
@@ -41,7 +36,7 @@ class foto extends CI_Controller
         $data_album = $this->M_Album->getDataalbum();
 
         $this->load->view('layout/header');
-        $this->load->view('layout/navbar');
+     
         $this->load->view('foto/tambahfoto', ['data_user' => $data_user, 'data_album' => $data_album]);
         $this->load->view('layout/footer');
     }
@@ -97,7 +92,6 @@ class foto extends CI_Controller
                 $this->load->view('foto/tambahfoto', $error);
                 $this->load->view('layout/header');
                 $this->load->view('layout/footer');
-                $this->load->view('layout/navbar'); // Replace "your_view" with your actual view for displaying errors
             }
         } else {
             // Form validation failed or initial load
@@ -109,7 +103,7 @@ class foto extends CI_Controller
             $this->load->view('foto/tambahfoto', $data, FALSE);
             $this->load->view('layout/header');
             $this->load->view('layout/footer');
-            $this->load->view('layout/navbar');
+           
         }
     }
 
@@ -182,7 +176,6 @@ class foto extends CI_Controller
             );
     
             $this->load->view('layout/header');
-            $this->load->view('layout/navbar');
             $this->load->view('foto/editfoto', $data, FALSE);
             $this->load->view('layout/footer');
         }

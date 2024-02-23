@@ -8,16 +8,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Profil</title>
+    <title>LuxeLens-Profil</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link rel="icon" href="<?= base_url('logo/6c.jpg') ?>" type="" style="widht: 200px; height: 200px;">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap"
         rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="<?= base_url() ?>temhome/css/bootstrap.min.css">
 
@@ -44,8 +45,44 @@ https://templatemo.com/tm-584-pod-talk
             font-size: 17px;
         }
 
+        .ji {
+            font-size: 13px;
+        }
+
         .judul-font {
             font-size: 20px;
+        }
+        .popup-button {
+            position: fixed;
+            top: 20px;
+            /* Atur jarak dari bawah */
+            left: 20px;
+            /* Atur jarak dari kanan */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+
+            /* Pastikan tombol muncul di atas konten lain */
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-10px);
+            }
+        }
+
+        .popup-button i {
+            animation: bounce 0.5s alternate infinite;
         }
     </style>
 </head>
@@ -56,8 +93,8 @@ https://templatemo.com/tm-584-pod-talk
 
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand me-lg-5 me-0" href="index.html">
-                    <img src="<?= base_url() ?>logo/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
+                <a class="navbar-brand me-lg-5 me-0" href="<?= base_url('home')?>">
+                    <img src="<?= base_url() ?>logo/b.png" class="logo-image img-fluid" alt="templatemo pod talk">
                 </a>
 
                 <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
@@ -77,37 +114,39 @@ https://templatemo.com/tm-584-pod-talk
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-lg-auto">
+                <ul class="navbar-nav ms-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="<?= base_url('home') ?>">Home</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Album</a>
+                            <a class="nav-link" href="<?= base_url('home/uploadfoto') ?>">Upload Foto</a>
                         </li>
-
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
-                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="listing-page.html">Listing Page</a></li>
-
-                                <li><a class="dropdown-item" href="detail-page.html">Detail Page</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link active" href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">Profil</a>
                         </li>
                     </ul>
                     <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
-                        <a href="<?= base_url('home/profil') ?>">
+                        <a href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">
                             <div class="btn custom-btn custom-border-btn smoothscroll">
 
-                                <img src="<?= base_url('assets/user/' . $this->session->userdata('foto_user')); ?>"
-                                    alt="Profile Picture" style="width: 30px; height: 25px; border-radius: 50%;">
-                                <?= $this->session->userdata('username'); ?>
+                            <?php
+                                $username = $this->session->userdata('username');
+                                $foto_user = $this->session->userdata('foto_user');
+                                $foto_user_path = base_url('assets/user/' . $foto_user);
+                                $default_foto_path = base_url('logo/user.png'); // Ganti dengan path foto default yang sesuai
+                            
+                                // Periksa apakah foto pengguna tersedia
+                                if ($foto_user && file_exists(FCPATH . 'assets/user/' . $foto_user)) {
+                                    $foto_path = $foto_user_path;
+                                } else {
+                                    $foto_path = $default_foto_path; // Gunakan foto default jika foto pengguna tidak tersedia
+                                }
+                                ?>
+
+                                <!-- Tampilkan gambar pengguna atau gambar default -->
+                                <img src="<?= $foto_path ?>" alt="<?= $foto_path ?>"
+                                    style="width: 30px; height: 28px; border-radius: 50%;">
+                                <?= $username ?>
                             </div>
                         </a>
                         <div class="btn custom-btn ">
@@ -126,29 +165,20 @@ https://templatemo.com/tm-584-pod-talk
                 </div>
             </div>
         </nav>
-
-
-        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+        <section class="hero-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-12 text-center">
-                        <img src="<?= base_url() ?>assets/user/194935.png" alt="Your Image" class="img-fluid mb-3"
-                            style="max-width: 150px;">
 
-                        <!-- Membungkus tombol-tombol dalam div -->
-                        <div class="buttons-wrapper">
-                            <a href="#section_2" class="btn custom-btn ">Edit Profil</a>
-                            <a href="#section_2" class="btn custom-btn ">Album</a>
-                            <a href="#section_2" class="btn custom-btn ">Aploud Foto</a>
+                    <div class="col-lg-12 col-12">
+                        <div class="text-center mb-5 pb-2">
+                          
                         </div>
                     </div>
+
                 </div>
             </div>
-        </header>
-
-
-
-
+        </section>
+        <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">   <button class="popup-button" onclick="showPopup()"><i class="fas fa-arrow-left"></i></button></a>
         </section>
         <section class="latest-podcast-section section-padding" id="section_2">
             <div class="container">
@@ -156,7 +186,7 @@ https://templatemo.com/tm-584-pod-talk
 
                     <div class="col-lg-12 col-12">
                         <div class="section-title-wrap mb-5">
-                            <h4 class="section-title">Edit Profil</h4>
+                            <h4 class="section-title"> Profil</h4>
                         </div>
                     </div>
 
@@ -166,12 +196,12 @@ https://templatemo.com/tm-584-pod-talk
                                 <div class="custom-block-icon-wrap">
                                     <div class="section-overlay"></div>
                                     <a class="custom-block-image-wrap">
-                                        <img src="<?= base_url() ?>temhome/images/podcast/11683425_4790593.jpg"
+                                        <img src="<?= base_url('assets/user/' . $data_user->foto_user); ?>"
                                             class="custom-block-image img-fluid" alt="">
 
-                                        <a href="#" class="custom-block-icon">
+                                        <!-- <a href="#" class="custom-block-icon">
                                             <i class="bi-play-fill"></i>
-                                        </a>
+                                        </a> -->
                                     </a>
                                 </div>
                             </div>
@@ -179,184 +209,89 @@ https://templatemo.com/tm-584-pod-talk
                             <div class="custom-block-info">
                                 <h5 class="small-font">
                                     <a> <i class="bi bi-person-badge-fill"></i>
-                                        Username
+                                        <?= $data_user->username; ?>
                                     </a>
                                 </h5>
                                 <h5 class="small-font">
                                     <a> <i class="bi bi-envelope-fill"></i>
-                                        Email@gmail.com
+                                        <?= $data_user->email; ?>
                                     </a>
                                 </h5>
                                 <h5 class="small-font">
                                     <a> <i class="bi bi-person-badge"></i>
-                                        Nama Lengkap
+                                        <?= $data_user->namalengkap; ?>
                                     </a>
                                 </h5>
                                 <h5 class="small-font">
                                     <a> <i class="bi bi-geo-fill"></i>
-                                        Alamat
+                                        <?= $data_user->alamat; ?>
                                     </a>
                                 </h5>
-
                             </div>
                         </div>
                     </div>
 
                     <!-- application/views/edit_profile.php -->
+                    <div class="col-lg-6 col-12 mb-4 mb-lg-0">
+                    <h4 class="section-title">Edit Profil</h4>
+                        <div class="custom-block d-flex">
+                            <?php echo form_open_multipart('home/editprofil/' . $data_user->user_id, 'class="user-form"'); ?>
+                            <div class="form-group">
+                                <label for="foto_user">Ganti Gambar</label>
+                                <input type="file" class="form-control" id="foto_user" name="foto_user">
+                                <small>Gambar Saat ini: <img
+                                        src="<?= base_url('assets/user/' . $data_user->foto_user); ?>" alt="Preview"
+                                        width="100"></small>
+                            </div>
+                            <!-- <div class="form-group ">
+                                <label for="input-1">User Id</label>
+                                <input type="text" class="form-control" value="<?php echo $data_user->user_id ?>"
+                                    disabled>
+                                <input type="hidden" name="user_id" value="<?php echo $data_user->user_id ?>">
+                            </div> -->
+                            <div class="form-group ">
+                                <label for="input-1">Username</label>
+                                <input type="text" class="form-control" name="username"
+                                    value="<?php echo $data_user->username ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-2">password</label>
+                                <input type="text" class="form-control" name="password"
+                                    value="<?php echo $data_user->password ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-3">Email</label>
+                                <input type="text" class="form-control" name="email"
+                                    value="<?php echo $data_user->email ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-4">Nama Lengkap</label>
+                                <input type="text" class="form-control" name="namalengkap"
+                                    value="<?php echo $data_user->namalengkap ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-5">Alamat</label>
+                                <input type="text" class="form-control" name="alamat"
+                                    value="<?php echo $data_user->alamat ?>">
+                            </div>
 
-                    <?php echo form_open_multipart('home/update/' . $user_data['user_id'], 'class="user-form"'); ?>
-                    <div class="form-group">
-                        <label for="input-1">Foto User</label>
-                        <input type="text" name="foto_user" class="form-control" id="input-1"
-                            value="<?= base_url('assets/user/' . $user_data['foto_user']) ?>" readonly>
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-light px-5"> Simpan</button>
+                                <button type="buttpn" data-dismiss="modal" class="btn btn-light px-5">
+                                    Batal</button>
+                            </div>
+                            <?php echo form_close(); ?>
+
+
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="input-2">Username</label>
-                        <input type="text" name="username" class="form-control" id="input-2"
-                            value="<?= $user_data['username'] ?>" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="input-3">Email</label>
-                        <input type="email" name="email" class="form-control" id="input-3"
-                            value="<?= $user_data['email'] ?>" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="input-4">Nama Lengkap</label>
-                        <input type="text" name="nama_lengkap" class="form-control" id="input-4"
-                            value="<?= $user_data['nama_lengkap'] ?>" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="input-5">Alamat</label>
-                        <input type="text" name="alamat" class="form-control" id="input-5"
-                            value="<?= $user_data['alamat'] ?>" required>
-                    </div>
-
-                    <div class="mt-2">
-                        <button type="submit" class="btn custom-btn">SAVE</button>
-                    </div>
-                    <?php echo form_close(); ?>
-
-
-
                 </div>
             </div>
         </section>
 
-
-
     </main>
-
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <div class="subscribe-form-wrap">
-                        <h6>Subscribe. Every weekly.</h6>
-
-                        <form class="custom-form subscribe-form" action="#" method="get" role="form">
-                            <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                class="form-control" placeholder="Email Address" required="">
-
-                            <div class="col-lg-12 col-12">
-                                <button type="submit" class="form-control" id="submit">Subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
-                    <h6 class="site-footer-title mb-3">Contact</h6>
-
-                    <p class="mb-2"><strong class="d-inline me-2">Phone:</strong> 010-020-0340</p>
-
-                    <p>
-                        <strong class="d-inline me-2">Email:</strong>
-                        <a href="#">inquiry@pod.co</a>
-                    </p>
-                </div>
-
-                <div class="col-lg-3 col-md-6 col-12">
-                    <h6 class="site-footer-title mb-3">Download Mobile</h6>
-
-                    <div class="site-footer-thumb mb-4 pb-2">
-                        <div class="d-flex flex-wrap">
-                            <a href="#">
-                                <img src="<?= base_url() ?>temhome/images/app-store.png"
-                                    class="me-3 mb-2 mb-lg-0 img-fluid" alt="">
-                            </a>
-
-                            <a href="#">
-                                <img src="<?= base_url() ?>temhome/images/play-store.png" class="img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <h6 class="site-footer-title mb-3">Social</h6>
-
-                    <ul class="social-icon">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-twitter"></a>
-                        </li>
-
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-whatsapp"></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container pt-5">
-            <div class="row align-items-center">
-
-                <div class="col-lg-2 col-md-3 col-12">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="<?= base_url() ?>temhome/images/pod-talk-logo.png" class="logo-image img-fluid"
-                            alt="templatemo pod talk">
-                    </a>
-                </div>
-
-                <div class="col-lg-7 col-md-9 col-12">
-                    <ul class="site-footer-links">
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Homepage</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Browse episodes</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Help Center</a>
-                        </li>
-
-                        <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-12">
-                    <p class="copyright-text mb-0">Copyright © 2036 Talk Pod Company
-                        <br><br>
-                        Design: <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- JAVASCRIPT FILES -->
     <script src="<?= base_url() ?>temhome/js/jquery.min.js"></script>
     <script src="<?= base_url() ?>temhome/js/bootstrap.bundle.min.js"></script>

@@ -8,12 +8,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Galery</title>
+    <title>LuxeLens</title>
 
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="<?= base_url('logo/6c.jpg') ?>" type="" style="widht: 200px; height: 200px;">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap"
@@ -36,6 +39,221 @@ TemplateMo 584 Pod Talk
 https://templatemo.com/tm-584-pod-talk
 
 -->
+
+    <style>
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px) rotate(0.5deg);
+            }
+
+            50% {
+                transform: translateX(5px) rotate(-0.5deg);
+            }
+
+            75% {
+                transform: translateX(-5px) rotate(0.5deg);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .liked {
+            color: red;
+            /* Atur warna merah sesuai keinginan */
+        }
+
+        .custom-block {
+            margin-bottom: 20px;
+            /* Tambahkan margin bottom di sini */
+        }
+
+        .has11 {
+            padding-top: 5px;
+        }
+
+        .custom-block1 {
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius-medium);
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+            transition: all 0.3s ease;
+
+
+        }
+
+        .custom-block1::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, rgba(0, 255, 255, 0.5), transparent, transparent, rgba(240, 248, 255, 0.5));
+            filter: blur(20px);
+            z-index: -1;
+        }
+
+        .kots::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, rgb(43, 191, 254), rgb(62, 254, 255), rgba(0, 255, 255, 0.5), transparent, transparent, rgba(240, 248, 255, 0.5));
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .slid::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, transparent, rgb(62, 254, 255), rgb(43, 191, 254), rgb(30, 144, 255), rgb(30, 144, 255), rgb(43, 191, 254), rgb(62, 254, 255), rgba(240, 248, 255, 0.5));
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .slid-atur {
+            padding-bottom: 50px;
+        }
+
+        .fotos {
+            padding-top: 20px;
+        }
+
+        .small-font {
+            font-size: 12px;
+            margin-left: 30px;
+
+        }
+
+        .custom-block1:hover {
+            background: var(--white-color);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .populer {
+            align-items: center;
+        }
+
+        .popup-button111 {
+            position: fixed;
+            bottom: 20px;
+            /* Atur jarak dari bawah */
+            right: 20px;
+            /* Atur jarak dari kanan */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            /* Pastikan tombol muncul di atas konten lain */
+        }
+
+        .popup-button {
+            position: fixed;
+            top: 20px;
+            /* Atur jarak dari bawah */
+            left: 20px;
+            /* Atur jarak dari kanan */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+
+            /* Pastikan tombol muncul di atas konten lain */
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-10px);
+            }
+        }
+
+        .popup-button i {
+            animation: bounce 0.5s alternate infinite;
+        }
+
+        .nama-foto {
+            margin-left: 25px;
+        }
+
+        .na-peng {
+            font-size: 15px;
+            color: black;
+        }
+
+        .user {
+            background-color: rgb(176, 224, 230);
+            margin-bottom: 280px;
+            border-radius: 10px;
+        }
+
+        .na-peng {
+            font-size: 14px;
+            color: black;
+        }
+
+        .teks-kom {
+            margin-left: 30px;
+            font-size: 14px;
+        }
+
+        .pop {
+            /* background-color: rgb(72, 209, 204); */
+            font-size: 15px;
+            border-radius: 7px;
+            width: 400px;
+
+        }
+
+        .pop::before {
+            background-image: linear-gradient(to right, transparent, rgb(62, 254, 255), rgb(43, 191, 254), rgb(30, 144, 255), rgb(30, 144, 255), rgb(43, 191, 254), rgb(62, 254, 255), rgba(240, 248, 255, 0.5));
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, transparent, rgb(62, 254, 255), rgb(43, 191, 254), rgb(30, 144, 255), rgb(30, 144, 255), rgb(43, 191, 254), rgb(62, 254, 255), rgba(240, 248, 255, 0.5));
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .pop:hover {
+            background: var(--white-color);
+            box-shadow: 0 1rem 3rem rgb(62, 250, 153);
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+    </style>
+
+
+
 </head>
 
 <body>
@@ -44,20 +262,21 @@ https://templatemo.com/tm-584-pod-talk
 
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand me-lg-5 me-0" href="index.html">
-                    <img src="<?= base_url() ?>logo/logo.png" class="logo-image img-fluid" alt="templatemo pod talk">
+                <a class="navbar-brand me-lg-5 me-0" href="<?= base_url('home') ?>">
+                    <img src="<?= base_url() ?>logo/b.png" class="logo-image img-fluid" alt="">
                 </a>
 
-                <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
+                <form action="<?= base_url('home/search') ?>" method="get"
+                    class="custom-form search-form flex-fill me-3" role="search">
                     <div class="input-group input-group-lg">
                         <input name="search" type="search" class="form-control" id="search" placeholder="Search Galeri"
                             aria-label="Search">
-
-                        <button type="submit" class="form-control" id="submit">
-                            <i class="bi-search"></i>
+                        <button type="submit" class="btn btn-primary"> <!-- Ubah class sesuai kebutuhan -->
+                            <i class="bi bi-search"></i> <!-- Gunakan class ikon yang sesuai -->
                         </button>
                     </div>
                 </form>
+
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,36 +285,114 @@ https://templatemo.com/tm-584-pod-talk
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="<?= base_url('home') ?>">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('home/album') ?>">Album</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('#') ?>">Upload Gambar</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="<?= base_url('') ?>">Profil</a>
-                        </li>
+                        <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="<?= base_url('home') ?>">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('home/uploadfoto') ?>">Upload Foto</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link"
+                                    href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">Profil</a>
+                            </li>
+                        <?php else: ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="<?= base_url('home') ?>">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= base_url('login') ?>">Upload Foto</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="<?= base_url('login') ?>">Profil</a>
+                            </li>
+                        <?php endif; ?>
 
                     </ul>
-                    <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
-                        <a href="<?= base_url('home/profil') ?>">
-                            <div class="btn custom-btn custom-border-btn smoothscroll">
+                    <button class="popup-button" onclick="showPopup()"><i class="fas fa-arrow-left"><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>"></a></i></button>
 
-                                <img src="<?= base_url('assets/user/' . $this->session->userdata('foto_user')); ?>"
-                                    alt="Profile Picture" style="width: 30px; height: 25px; border-radius: 50%;">
-                                <?= $this->session->userdata('username'); ?>
+                    <!-- Pop-up modal -->
+                    <div id="popupModal"
+                        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 2000; overflow: auto;">
+                        <div
+                            style="position: relative; margin: 50px auto; width: 90%; max-width: 900px; background-color: #fff; padding: 20px; border-radius: 5px;">
+                            <div class="row">
+                                <div class="d-flex align-items-center">
+                                    <div class="custom-block-image-wrap">
+                                        <a href="">
+                                            <h6 class="nama-foto">
+                                                <a href="">Nama Foto</a>
+                                            </h6>
+
+                                            <img src="<?= base_url() ?>temhome/images/podcast/27376480_7326766.jpg"
+                                                class="custom-block-image img-fluid" alt=""
+                                                style="width: 100%; height: auto; max-width: 400px;">
+                                            <div class="custom-block-bottom d-flex justify-content-between mt-1"
+                                                style="margin-top: -5px;">
+                                                <a href="#" class="bi-heart me-1">
+                                                    <span>2.5k</span>
+                                                </a>
+                                                <a href="#" class="bi-chat me-1">
+                                                    <span>924k</span>
+                                                </a>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="custom-block-info ms-2 user" style="width: calc(100% - 400px);">
+                                        <div class="profile-block d-flex align-items-center">
+                                            <img src="<?= base_url() ?>temhome/images/profile/woman-posing-black-dress-medium-shot.jpg"
+                                                class="profile-block-image img-fluid me-2"
+                                                style="width: 25px; height: 25px; border-radius: 50%;" alt="">
+                                            <p class="mb-0 na-peng" style="margin-top: -5px;">Nama Pengguna</p>
+                                        </div>
+                                        <div class="comment-content">
+                                            <p class="teks-kom" style="word-wrap: break-word;">
+                                                komentarkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</p>
+                                            <p class="comment-date small-font">12-02-2034</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="hidePopup()" style="position: absolute; top: 10px; right: 10px;">Tutup
+                            Pop-up</button>
+                    </div>
+
+
+
+
+
+
+                    <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
+                        <a href="<?php echo base_url('home/editprofil/') . $this->session->userdata('user_id') ?>">
+                            <div class="btn custom-btn custom-border-btn smoothscroll">
+                                <?php
+                                $username = $this->session->userdata('username');
+                                $foto_user = $this->session->userdata('foto_user');
+                                $foto_user_path = base_url('assets/user/' . $foto_user);
+                                $default_foto_path = base_url('logo/user.png'); // Ganti dengan path foto default yang sesuai
+                            
+                                // Periksa apakah foto pengguna tersedia
+                                if ($foto_user && file_exists(FCPATH . 'assets/user/' . $foto_user)) {
+                                    $foto_path = $foto_user_path;
+                                } else {
+                                    $foto_path = $default_foto_path; // Gunakan foto default jika foto pengguna tidak tersedia
+                                }
+                                ?>
+
+                                <!-- Tampilkan gambar pengguna atau gambar default -->
+                                <img src="<?= $foto_path ?>" alt="<?= $foto_path ?>"
+                                    style="width: 30px; height: 28px; border-radius: 50%;">
+                                <?= $username ?>
+
                             </div>
                         </a>
-                        <div class="btn custom-btn ">
-                            <a href="<?= base_url('login/logout') ?>">
+                        <a href="<?= base_url('login/logout') ?>">
+                            <div class="btn custom-btn ">
                                 <span><i class="bi bi-box-arrow-right"></i></span>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     <?php else: ?>
                         <div class="ms-4">
                             <a href="<?= base_url('login') ?>"
@@ -115,524 +412,169 @@ https://templatemo.com/tm-584-pod-talk
 
                     <div class="col-lg-12 col-12">
                         <div class="text-center mb-5 pb-2">
-                            <h1 class="text-white">Visual Gallery</h1>
 
-                            <p class="text-white">Nikmati pengalaman untuk menjelajahi foto galeri </p>
-
-                            <!-- <a href="#section_2" class="btn custom-btn smoothscroll mt-3">Start listening</a> -->
                         </div>
-
-                        <!-- <div class="owl-carousel owl-theme">
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/smiling-business-woman-with-folded-hands-against-white-wall-toothy-smile-crossed-arms.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">
-                                        Candice
-                                        <img src="<?= base_url() ?>temhome/images/verified.png"
-                                            class="owl-carousel-verified-image img-fluid" alt="">
-                                    </h4>
-
-                                    <span class="badge">Storytelling</span>
-
-                                    <span class="badge">Business</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-twitter"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/handsome-asian-man-listening-music-through-headphones.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">
-                                        William
-                                        <img src="<?= base_url() ?>temhome/images/verified.png"
-                                            class="owl-carousel-verified-image img-fluid" alt="">
-                                    </h4>
-
-                                    <span class="badge">Creative</span>
-
-                                    <span class="badge">Design</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-twitter"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-pinterest"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/cute-smiling-woman-outdoor-portrait.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">Taylor</h4>
-
-                                    <span class="badge">Modeling</span>
-
-                                    <span class="badge">Fashion</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-twitter"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-pinterest"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/man-portrait.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">Nick</h4>
-
-                                    <span class="badge">Acting</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-instagram"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-youtube"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/woman-posing-black-dress-medium-shot.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">
-                                        Elsa
-                                        <img src="<?= base_url() ?>temhome/images/verified.png"
-                                            class="owl-carousel-verified-image img-fluid" alt="">
-                                    </h4>
-
-                                    <span class="badge">Influencer</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-instagram"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-youtube"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="owl-carousel-info-wrap item">
-                                <img src="<?= base_url() ?>temhome/images/profile/smart-attractive-asian-glasses-male-standing-smile-with-freshness-joyful-casual-blue-shirt-portrait-white-background.jpg"
-                                    class="owl-carousel-image img-fluid" alt="">
-
-                                <div class="owl-carousel-info">
-                                    <h4 class="mb-2">Chan</h4>
-
-                                    <span class="badge">Education</span>
-                                </div>
-
-                                <div class="social-share">
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-linkedin"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-whatsapp"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
 
                 </div>
             </div>
         </section>
 
-
-        <section class="latest-podcast-section section-padding pb-0" id="section_2">
-            <div class="container">
-                <!-- <div class="row justify-content-center">
-
-                    <div class="col-lg-12 col-12">
-                        <div class="section-title-wrap mb-5">
-                            <h4 class="section-title">Trending Photos</h4>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-12 mb-4 mb-lg-0">
-                        <div class="custom-block d-flex">
-                            <div class="">
-                                <div class="custom-block-icon-wrap">
-                                    <div class="section-overlay"></div>
-                                    <a href="detail-page.html" class="custom-block-image-wrap">
-                                        <img src="<?= base_url() ?>temhome/images/podcast/11683425_4790593.jpg"
-                                            class="custom-block-image img-fluid" alt="">
-
-                                        <a href="#" class="custom-block-icon">
-                                            <i class="bi-play-fill"></i>
-                                        </a>
-                                    </a>
-                                </div>
-
-                                <div class="mt-2">
-                                    <a href="#" class="btn custom-btn">
-                                        Subscribe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="custom-block-info">
-                                <div class="custom-block-top d-flex mb-1">
-                                    <small class="me-4">
-                                        <i class="bi-clock-fill custom-icon"></i>
-                                        50 Minutes
-                                    </small>
-
-                                    <small>Episode <span class="badge">15</span></small>
-                                </div>
-
-                                <h5 class="mb-2">
-                                    <a href="detail-page.html">
-                                        Modern Vintage
-                                    </a>
-                                </h5>
-
-                                <div class="profile-block d-flex">
-                                    <img src="<?= base_url() ?>temhome/images/profile/woman-posing-black-dress-medium-shot.jpg"
-                                        class="profile-block-image img-fluid" alt="">
-
-                                    <p>
-                                        Elsa
-                                        <img src="<?= base_url() ?>temhome/images/verified.png"
-                                            class="verified-image img-fluid" alt="">
-                                        <strong>Influencer</strong>
-                                    </p>
-                                </div>
-
-                                <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-
-                                <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                    <a href="#" class="bi-headphones me-1">
-                                        <span>120k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-heart me-1">
-                                        <span>42.5k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-chat me-1">
-                                        <span>11k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-download">
-                                        <span>50k</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-column ms-auto">
-                                <a href="#" class="badge ms-auto">
-                                    <i class="bi-heart"></i>
-                                </a>
-
-                                <a href="#" class="badge ms-auto">
-                                    <i class="bi-bookmark"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-12">
-                        <div class="custom-block d-flex">
-                            <div class="">
-                                <div class="custom-block-icon-wrap">
-                                    <div class="section-overlay"></div>
-                                    <a href="detail-page.html" class="custom-block-image-wrap">
-                                        <img src="<?= base_url() ?>temhome/images/podcast/12577967_02.jpg"
-                                            class="custom-block-image img-fluid" alt="">
-
-                                        <a href="#" class="custom-block-icon">
-                                            <i class="bi-play-fill"></i>
-                                        </a>
-                                    </a>
-                                </div>
-
-                                <div class="mt-2">
-                                    <a href="#" class="btn custom-btn">
-                                        Subscribe
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="custom-block-info">
-                                <div class="custom-block-top d-flex mb-1">
-                                    <small class="me-4">
-                                        <i class="bi-clock-fill custom-icon"></i>
-                                        15 Minutes
-                                    </small>
-
-                                    <small>Episode <span class="badge">45</span></small>
-                                </div>
-
-                                <h5 class="mb-2">
-                                    <a href="detail-page.html">
-                                        Daily Talk
-                                    </a>
-                                </h5>
-
-                                <div class="profile-block d-flex">
-                                    <img src="<?= base_url() ?>temhome/images/profile/handsome-asian-man-listening-music-through-headphones.jpg"
-                                        class="profile-block-image img-fluid" alt="">
-
-                                    <p>William
-                                        <strong>Vlogger</strong>
-                                    </p>
-                                </div>
-
-                                <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-
-                                <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                    <a href="#" class="bi-headphones me-1">
-                                        <span>140k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-heart me-1">
-                                        <span>22.4k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-chat me-1">
-                                        <span>16k</span>
-                                    </a>
-
-                                    <a href="#" class="bi-download">
-                                        <span>62k</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-column ms-auto">
-                                <a href="#" class="badge ms-auto">
-                                    <i class="bi-heart"></i>
-                                </a>
-
-                                <a href="#" class="badge ms-auto">
-                                    <i class="bi-bookmark"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> -->
+        <div class="row" style="margin-top: -30px;">
+            <div class="section-title-wrap mb-4 ">
+                <center>
+                    <h4 class="section-title">Album</h4>
+                </center>
             </div>
-        </section>
-        <section class="trending-podcast-section section-padding">
+            <div class="col-lg-12 col-12">
+                <div class="owl-carousel owl-theme  slid-atur">
+                    <?php foreach ($data_album as $row) { ?>
+                        <div class="owl-carousel-info-wrap item text-center slid">
+                            <a href="<?= base_url('home/dataalbum/' . $row->album_id); ?>">
+                                <img src="<?= base_url('assets/album/' . $row->kover); ?>"
+                                    class="owl-carousel-image img-fluid rounded" alt=""
+                                    style="width: 370px; height: 200px;">
+                                <h6 style="font-size: 15px; margin-top: 10px; ">
+                                    <?= $row->nama_album ?>
+                                </h6>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <div class="pop-atas">
+            <center>
+                <a href="<?= base_url('home/liketerbanyak') ?>">
+                    <h4 class="section-title pop">Like Terbanyak</h4>
+                </a>
+                <a href="<?= base_url('home/komenterbanyak') ?>">
+                    <h4 class="section-title pop">komentar Terbanyak</h4>
+                </a>
+            </center>
+        </div>
+
+
+
+
+
+        <section class="trending-podcast-section section-padding fotos">
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-12 col-12">
-                        <div class="section-title-wrap mb-5">
-                            <h4 class="section-title">Photo</h4>
-                        </div>
-                    </div>
-                    <?php if ($this->session->userdata('user_id')): ?>
-                        <?php foreach ($data_foto as $row) { ?>
-                            <div class="col-lg-4 col-12 mb-4 mb-lg-0">
-                                <div class="custom-block custom-block-full">
-                                    <div class="custom-block-image-wrap">
+                    <?php foreach ($data_foto as $row) { ?>
+                        <div class="col-lg-4 col-12 mb-4 mb-lg-0">
+                            <div class="custom-block custom-block-full">
+                                <div class="custom-block-image-wrap">
+                                    <a href="<?= base_url('home/detail/' . $row->foto_id); ?>">
+                                        <img src="<?= base_url('assets/' . $row->lokasi_file); ?>"
+                                            class="custom-block-image img-fluid" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="custom-block-info">
+                                    <h5 class="mb-2">
                                         <a href="<?= base_url('home/detail/' . $row->foto_id); ?>">
-                                            <img src="<?= base_url('assets/' . $row->lokasi_file); ?>"
-                                                class="custom-block-image img-fluid" alt="">
+                                            <?php echo $row->judul_foto ?>
                                         </a>
-                                    </div>
+                                    </h5>
 
-                                    <div class="custom-block-info">
-                                        <h5 class="mb-2">
-                                            <a href="<?= base_url('home/detail/' . $row->foto_id); ?>">
-                                                <?php echo $row->judul_foto ?>
-                                            </a>
-                                        </h5>
-
-                                        <?php foreach ($data_user as $user) { ?>
-                                            <?php if ($user->user_id == $row->user_id) { ?>
-                                                <div class="profile-block d-flex">
+                                    <?php foreach ($data_user as $user) { ?>
+                                        <?php if ($user->user_id == $row->user_id) { ?>
+                                            <div class="profile-block d-flex">
+                                                <?php if (!empty($user->foto_user)): ?>
                                                     <img src="<?= base_url('assets/user/' . $user->foto_user); ?>"
                                                         class="profile-block-image img-fluid" alt="">
+                                                <?php else: ?>
+                                                    <img src="<?= base_url('logo/user.png'); ?>" class="profile-block-image img-fluid"
+                                                        alt="">
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($user->foto_user)): ?>
                                                     <p>
                                                         <?= $user->namalengkap; ?>
                                                         <strong></strong>
                                                     </p>
-                                                </div>
-                                            <?php } ?>
+                                                <?php else: ?>
+                                                    <p>Data user belum lengkap😨</p>
+                                                <?php endif; ?>
+                                            </div>
                                         <?php } ?>
-                                        <td>
-                                            <small style="color: black;">
-                                                Tanggal Unggah:
-                                                <?= date('d F Y', strtotime($row->tgl_unggah)); ?>
-                                            </small>
-                                        </td>
+                                    <?php } ?>
+                                    <td>
+                                        <small style="color: black;">
+                                            Tanggal Unggah:
+                                            <?= date('d F Y', strtotime($row->tgl_unggah)); ?>
+                                        </small>
+                                    </td>
 
 
-                                        <div class="product-descc" id="productDescription<?= $row->foto_id ?>">
-                                            <p>
-                                                <span class="short-descc">
-                                                    <?= substr($row->des_foto, 0, 65); ?>...
-                                                </span>
-                                                <span class="full-descc" style="display: none;">
-                                                    <?= $row->des_foto; ?>
-                                                </span>
-                                                <a class="toggle-link" href="javascript:void(0);"
-                                                    onclick="toggleDescription(<?= $row->foto_id ?>)">Lihat Selengkapnya</a>
-                                            </p>
-                                        </div>
-
-                                        <div class="custom-block-bottom d-flex justify-content-between mt-3">
-                                            <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
-                                                <?php $like_url = base_url('like/' . ($isLiked[$row->foto_id] ? 'unlikeh' : 'likeh') . '/' . $row->foto_id); ?>
-                                                <a href="<?= $like_url ?>" class="bi bi-heart me-1" id="likeIcon">
-                                                    <span>
-                                                        <?= $likeCounts[$row->foto_id] ?>
-                                                    </span>
-                                                </a>
-                                            <?php else: ?>
-                                                <a href="<?= base_url('login') ?>" class="bi bi-heart me-1" id="likeIcon">
-                                                    <span>
-                                                        <?= $likeCounts[$row->foto_id] ?>
-                                                    </span>
-                                                </a>
-                                            <?php endif; ?>
-
-
-                                            <a href="#" class="bi-chat me-1">
-                                                <span>924k</span>
-                                            </a>
-                                        </div>
+                                    <div class="product-descc" id="productDescription<?= $row->foto_id ?>">
+                                        <p>
+                                            <span class="short-descc">
+                                                <?= substr($row->des_foto, 0, 65); ?>...
+                                            </span>
+                                            <span class="full-descc" style="display: none;">
+                                                <?= $row->des_foto; ?>
+                                            </span>
+                                            <a class="toggle-link" href="javascript:void(0);"
+                                                onclick="toggleDescription(<?= $row->foto_id ?>)">Lihat Selengkapnya</a>
+                                        </p>
                                     </div>
 
-                                    <div class="social-share d-flex flex-column ms-auto">
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-heart"></i>
-                                        </a>
+                                    <div class="custom-block-bottom d-flex justify-content-between mt-3">
 
-                                        <a href="#" class="badge ms-auto">
-                                            <i class="bi-bookmark"></i>
-                                        </a>
+                                        <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
+                                            <?php
+                                            $like_url = base_url('like/' . ($isLiked[$row->foto_id] ? 'unlikeh' : 'likeh') . '/' . $row->foto_id);
+                                            $like_class = $isLiked[$row->foto_id] ? 'liked' : '';
+                                            $heart_class = $isLiked[$row->foto_id] ? 'bi-heart-fill' : 'bi-heart';
+                                            $heart_color = $isLiked[$row->foto_id] ? 'style="color: red;"' : ''; // Menambahkan warna merah jika dilike
+                                            ?>
+                                            <a href="<?= $like_url ?>" class="bi <?= $heart_class ?> <?= $like_class ?> me-1"
+                                                id="likeIcon" <?= $heart_color ?>>
+                                                <span>
+                                                    <?= $likeCounts[$row->foto_id] ?>
+                                                </span>
+                                            </a>
+                                        <?php else: ?>
+                                            <a href="<?= base_url('login') ?>" class="bi bi-heart me-1" id="likeIcon">
+                                                <span>
+                                                    <?= $likeCounts[$row->foto_id] ?>
+                                                </span>
+                                            </a>
+                                        <?php endif; ?>
+
+                                        <?php if ($this->session->userdata('role_id') == 1 || $this->session->userdata('role_id') == 2): ?>
+                                            <a href="<?= base_url('home/detail/' . $row->foto_id); ?>"
+                                                class="bi-chat-dots me-1">
+                                                <span>
+                                                    <?= $commentCounts[$row->foto_id] ?>
+                                                </span>
+                                            </a>
+                                        <?php else: ?>
+                                            <a href="<?= base_url('login') ?>" class="bi bi-chat-dots me-1" id="likeIcon">
+                                                <span>
+                                                    <span>
+                                                        <?= $commentCounts[$row->foto_id] ?>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        <?php endif; ?>
+
                                     </div>
                                 </div>
+
+
                             </div>
-                        <?php } ?>
-                    <?php endif; ?>
+                        </div>
+                    <?php } ?>
+
 
                 </div>
             </div>
         </section>
     </main>
-
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                    <div class="branding">
-                        <a class="navbar-brand" href="<?= base_url('') ?>">
-                            <img src="<?= base_url() ?>logo/bwh.png" style="width: 70%;" class="logo-image img-fluid"
-                                alt="templatemo pod talk">
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Bagian kedua footer -->
-                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-md-0 mb-lg-0">
-                    <h6 class="site-footer-title mb-3">Contact</h6>
-                    <p class="mb-2"><strong class="d-inline me-2">Phone:</strong> +62 896-2715-9368</p>
-                    <p>
-                        <strong class="d-inline me-2">Email:</strong>
-                        <a href="#">visualgallery@gmail.com</a>
-                    </p>
-                </div>
-
-                <!-- Bagian ketiga footer -->
-                <div class="col-lg-3 col-md-6 col-12">
-                    <h6 class="site-footer-title mb-3">Social</h6>
-                    <ul class="social-icon">
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-instagram"></a>
-                        </li>
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-twitter"></a>
-                        </li>
-                        <li class="social-icon-item">
-                            <a href="#" class="social-icon-link bi-whatsapp"></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Bagian keempat footer -->
-        <div class="container pt-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 col-12">
-                    <!-- Teks hak cipta di tengah -->
-                    <p class="copyright-text mb-0 text-center">Copyright © 2024 Visual Gallery</p>
-                </div>
-
-                <!-- Bagian kelima footer -->
-                <div class="col-lg-6 col-12 text-end">
-                    <!-- Tambahkan elemen lain di sini jika diperlukan -->
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-
 
     <!-- JAVASCRIPT FILES -->
     <script src="<?= base_url() ?>temhome/js/jquery.min.js"></script>
@@ -656,9 +598,50 @@ https://templatemo.com/tm-584-pod-talk
                 link.innerHTML = 'Lihat Lebih Sedikit';
             }
         }
-
-
     </script>
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                margin: 0, // Atur margin keseluruhan slider
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 5,
+                        nav: true,
+                        loop: false
+                    }
+                },
+                navText: ["<i class='bi bi-arrow-left'></i>", "<i class='bi bi-arrow-right'></i>"],
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                autoHeight: true
+            });
+        });
+    </script>
+    <script>
+        // Fungsi untuk menampilkan pop-up
+        function showPopup() {
+            document.getElementById("popupModal").style.display = "block";
+        }
+
+        // Fungsi untuk menyembunyikan pop-up
+        function hidePopup() {
+            document.getElementById("popupModal").style.display = "none";
+        }
+    </script>
+
+    <!-- Banyak konten di sini untuk menunjukkan bahwa tombol tetap muncul saat digulir -->
+
 
 </body>
 

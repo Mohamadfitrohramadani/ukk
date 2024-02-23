@@ -7,15 +7,20 @@ class Komentar extends CI_Controller
 {
     public function __construct()
     {
+       
         parent::__construct();
         $this->load->model('M_Komen');
     }
 
-    public function index($foto_id)
+    public function index()
     {
-        $comments = $this->M_Komen->getCommentsByFotoId($foto_id);
-        $data['comments'] = $comments;
-        $this->load->view('komentar/view_komentar', $data);
+        
+        $komen = $this->M_Komen->getDatakomen();
+        $DATA = array('data_komen' => $komen);
+        $this->load->view('komen/viewkomen', $DATA);
+        $this->load->view('layout/header');
+        $this->load->view('layout/footer');
+       
     }
 
     public function submitComment()
@@ -36,5 +41,11 @@ class Komentar extends CI_Controller
         // Setelah menyimpan komentar, redirect kembali ke halaman detail
         redirect('home/detail/' . $foto_id);
     }
+    public function delete($komen_id)
+    {
+        $this->M_Komen->DeleteDatakomen($komen_id);
+        redirect(base_url('komentar/'));
+    }
+
     
 }

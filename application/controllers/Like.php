@@ -7,18 +7,14 @@ class Like extends CI_Controller
     {
         parent::__construct();
 
-        // if (!$this->session->likedata('email')) {
-        //     redirect('login');
-        // }
-
-        // $role_id = $this->session->likedata('role_id');
-
-        // if ($role_id == 2) {
-
-        //     redirect('home');
-        // }
+        // Periksa status login pengguna
+        if (!$this->session->userdata('email')) {
+            // Jika belum login, alihkan ke halaman login
+            redirect('login');
+        }
         $this->load->model('M_Like');
         $this->load->model('M_Foto');
+        $this->load->model('M_Album');
     }
     public function index()
     {
@@ -27,7 +23,7 @@ class Like extends CI_Controller
         $this->load->view('like/viewlike', $DATA);
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
+        
 
 
     }
@@ -37,7 +33,7 @@ class Like extends CI_Controller
         $this->load->view('like/tambahlike');
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
+       
     }
     public function Inputlike()
     {
@@ -70,7 +66,7 @@ class Like extends CI_Controller
         $this->load->view('like/editlike', $DATA);
         $this->load->view('layout/header');
         $this->load->view('layout/footer');
-        $this->load->view('layout/navbar');
+        
     }
     public function updatelike()
     {
@@ -96,96 +92,167 @@ class Like extends CI_Controller
         $this->M_Like->DeleteDatalike($like_id);
         redirect(base_url('like/'));
     }
+
+    //like di bagian halaman detail//
     public function like($foto_id)
     {
-        // Periksa apakah user sudah login
         if (!$this->session->userdata('user_id')) {
-            // Redirect atau tampilkan pesan kesalahan jika user belum login
             redirect('login');
         }
-
-        // Ambil user_id dari session
         $user_id = $this->session->userdata('user_id');
-
-        // Cek apakah foto_id valid
         if ($this->M_Foto->is_valid_foto($foto_id)) {
-            // Lakukan proses like
             $this->M_Like->like($foto_id, $user_id);
-            redirect('home/detail/' . $foto_id); // Ganti dengan URL halaman detail foto
+            redirect('home/detail/' . $foto_id);
         } else {
-            // Tampilkan pesan kesalahan jika foto_id tidak valid
             show_error('Invalid Foto ID');
         }
-        $data['foto_id'] = $foto_id; // Replace $foto_id with the actual value you want to pass
+        $data['foto_id'] = $foto_id;
         $this->load->view('home/viewdetail', $data);
     }
-    public function likeh($foto_id)
-{
-    // Periksa apakah user sudah login
-    if (!$this->session->userdata('user_id')) {
-        // Redirect atau tampilkan pesan kesalahan jika user belum login
-        redirect('login');
-    }
 
-    // Ambil user_id dari session
-    $user_id = $this->session->userdata('user_id');
 
-    // Cek apakah foto_id valid
-    if ($this->M_Foto->is_valid_foto($foto_id)) {
-        // Lakukan proses like
-        $this->M_Like->likeh($foto_id, $user_id);
-    } else {
-        // Tampilkan pesan kesalahan jika foto_id tidak valid
-        show_error('Invalid Foto ID');
-    }
-
-    // Redirect dengan URL halaman detail foto
-    redirect('home');
-}
-
+    //unlike di bagian halaman detail//
     public function unlike($foto_id)
     {
-        // Periksa apakah user sudah login
         if (!$this->session->userdata('user_id')) {
-            // Redirect atau tampilkan pesan kesalahan jika user belum login
             redirect('login');
         }
-
-        // Ambil user_id dari session
         $user_id = $this->session->userdata('user_id');
-
-        // Cek apakah foto_id valid
         if ($this->M_Foto->is_valid_foto($foto_id)) {
-            // Lakukan proses unlike
             $this->M_Like->unlike($foto_id, $user_id);
-            redirect('home/detail/' . $foto_id); // Ganti dengan URL halaman detail foto
+            redirect('home/detail/' . $foto_id);
         } else {
-            // Tampilkan pesan kesalahan jika foto_id tidak valid
             show_error('Invalid Foto ID');
         }
     }
-    public function unlikeh($foto_id)
+
+
+    //like di bagian halaman home//
+    public function likeh($foto_id)
     {
-        // Periksa apakah user sudah login
         if (!$this->session->userdata('user_id')) {
-            // Redirect atau tampilkan pesan kesalahan jika user belum login
             redirect('login');
         }
-    
-        // Cek apakah foto_id valid
+        $user_id = $this->session->userdata('user_id');
         if ($this->M_Foto->is_valid_foto($foto_id)) {
-            // Lakukan proses unlike
+            $this->M_Like->likeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home');
+    }
+
+    //unlike di bagian halaman home//
+    public function unlikeh($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
             $user_id = $this->session->userdata('user_id');
             $this->M_Like->unlikeh($foto_id, $user_id);
         } else {
-            // Tampilkan pesan kesalahan jika foto_id tidak valid
             show_error('Invalid Foto ID');
         }
-    
-        // Redirect ke halaman home
         redirect('home');
     }
-    
+
+
+
+
+    //like di bagian halaman like terbanyak//
+    public function liket($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        $user_id = $this->session->userdata('user_id');
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $this->M_Like->likeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home/liketerbanyak');
+    }
+    //unlike di bagian halaman like terbanyak//
+    public function unliket($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $user_id = $this->session->userdata('user_id');
+            $this->M_Like->unlikeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home/liketerbanyak');
+    }
+    //like di bagian halaman komen terbanyak//
+    public function likek($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        $user_id = $this->session->userdata('user_id');
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $this->M_Like->likeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home/komenterbanyak');
+    }
+
+    //unlike di bagian halaman komen terbanyak//
+    public function unlikek($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $user_id = $this->session->userdata('user_id');
+            $this->M_Like->unlikeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home/komenterbanyak');
+    }
+
+
+    //like di bagian halaman album//
+    public function likealbum($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        $user_id = $this->session->userdata('user_id');
+        $album_id = $this->M_Foto->get_album_id_by_foto($foto_id);
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $this->M_Like->likeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+        redirect('home/dataalbum/' . $album_id);
+    }
+
+    //unlike di bagian halaman kategori / album//
+    public function unlikealbum($foto_id)
+    {
+        if (!$this->session->userdata('user_id')) {
+            redirect('login');
+        }
+        $album_id = $this->M_Foto->get_album_id_by_foto($foto_id);
+        if ($this->M_Foto->is_valid_foto($foto_id)) {
+            $user_id = $this->session->userdata('user_id');
+            $this->M_Like->unlikeh($foto_id, $user_id);
+        } else {
+            show_error('Invalid Foto ID');
+        }
+
+        // Redirect ke halaman home
+        redirect('home/dataalbum/' . $album_id);
+    }
+
 
 
 

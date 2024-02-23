@@ -16,8 +16,8 @@
     <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
         <div class="brand-logo">
             <a href="index.html">
-                <img src="<?= base_url() ?>template/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-                <h5 class="logo-text">Dashtreme Admin</h5>
+                <img src="<?= base_url() ?>logo/b.png" class="logo-icon" alt="logo icon">
+                <h5 class="logo-text">Luxe Lens</h5>
             </a>
         </div>
         <ul class="sidebar-menu do-nicescrol">
@@ -51,8 +51,8 @@
                 </a>
             </li>
 
-            <li class="<?= (current_url() == base_url('komen')) ? 'active' : ''; ?>">
-                <a href="<?= base_url('komen') ?>">
+            <li class="<?= (current_url() == base_url('komentar')) ? 'active' : ''; ?>">
+                <a href="<?= base_url('komentar') ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-chat-right-text-fill" viewBox="0 0 16 16">
                         <path
@@ -76,6 +76,12 @@
             <li class="<?= (current_url() == base_url('user')) ? 'active' : ''; ?>">
                 <a href="<?= base_url('user') ?>">
                     <i class="zmdi zmdi-account-box"></i> <span>User</span>
+
+                </a>
+            </li>
+            <li class="">
+                <a href="<?= base_url('login/logout') ?>">
+                    <i class="zmdi zmdi-arrow-right"></i> <span>Log Out</span>
 
                 </a>
             </li>

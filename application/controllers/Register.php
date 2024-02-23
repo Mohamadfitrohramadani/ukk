@@ -23,7 +23,7 @@ class Register extends CI_Controller
     {
         $user_id = $this->input->post('user_id');
         $username = $this->input->post('username');
-        $password = password_hash($this->input->post('password'),PASSWORD_DEFAULT);
+        $password = $this->input->post('password');
         $email = $this->input->post('email');
         $namalengkap = $this->input->post('namalengkap');
         $alamat = $this->input->post('alamat');

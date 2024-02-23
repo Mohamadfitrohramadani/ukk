@@ -11,7 +11,7 @@
     <link href="<?= base_url() ?>template/assets/css/pace.min.css" rel="stylesheet" />
     <script src="<?= base_url() ?>template/assets/js/pace.min.js"></script>
     <!--favicon-->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= base_url('logo/6c.jpg') ?>" type="" style="widht: 200px; height: 200px;">
     <!-- Vector CSS -->
     <link href="<?= base_url() ?>template/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <!-- simplebar CSS-->

@@ -253,7 +253,7 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 480px;
+  min-height: 150px;
   position: relative;
 }
 
@@ -604,7 +604,9 @@ main {
   overflow: hidden;
   padding: 30px;
   transition: all 0.3s ease;
+  
 }
+
 
 .custom-block:hover {
   background: var(--white-color);
